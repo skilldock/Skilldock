@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillDock - Upgrade Your Skills with Free Verified Internships</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #fff;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FF7F50, #d656ce);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, #FF7F50, #9932CC);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            padding: 0 15px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links li a:hover {
+            color: #9932CC;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(255, 127, 80, 0.1), rgba(153, 50, 204, 0.1));
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 127, 80, 0.2), rgba(153, 50, 204, 0.2));
+            z-index: -1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(153, 50, 204, 0.2), rgba(255, 127, 80, 0.2));
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, #FF7F50, #9932CC);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        /* About Section */
+        .about {
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #FF7F50, #9932CC);
+            border-radius: 2px;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Internships Section */
+        .internships {
+            background-color: white;
+        }
+
+        .domains-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 3rem;
+        }
+
+        .domain-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .domain-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .domain-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #FF7F50, #9932CC);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .domain-desc {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: #f9f9f9;
+        }
+
+        .contact-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            margin-top: 3rem;
+        }
+
+        .contact-info, .contact-form {
+            flex: 1;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-control {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #9932CC;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .social-links {
+            margin-top: 2rem;
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f1f1f1;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, #FF7F50, #9932CC);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Media Queries for Responsive Design */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: auto;
+                background-color: white;
+                flex-direction: column;
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                transition: left 0.3s ease;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .domains-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+            }
+        }
+
+        /* Mobile Menu Toggle (with CSS only) */
+        #menu-toggle {
+            display: none;
+        }
+
+        #menu-toggle:checked ~ .nav-links {
+            left: 0;
+        }
+
+        /* For CSS-only mobile menu toggle */
+        .menu-btn {
+            display: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+                font-size: 1.5rem;
+                margin-right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container container">
+            <a href="#" class="logo"><span>Skill</span>Dock</a>
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="menu-btn">☰</label>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#internships">Internships</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1 class="hero-title">Upgrade Your Skills with <span>Skilled & Verified Internships</span></h1>
+            <p class="hero-subtitle">Join thousands of students who have transformed their careers with our government-recognized certificate programs.</p>
+            <a href="#internships" class="btn btn-primary">Get Started</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="about-content">
+                <p class="about-text"> Welcome to SkillDock, your gateway to real-world experience and career growth! 🚀<br>
+
+                    We are an online internship platform dedicated to providing affordable, high-quality, and self-paced internships in Web Development, Full-Stack Development, Data Analytics, Data Science, UI/UX Design, Mobile App Development, Cyber Security, Software Testing, and Machine Learning.
+                    
+                    At SkillDock, we believe in learning by doing. Our one-month internship program is designed to help students and aspiring professionals build industry-relevant skills through hands-on projects.</p>
+                <p class="about-text">For just ₹99, interns receive:<br>
+                    <strong>✅ A verified offer letter<br>
+                    ✅ A resume-building guide and tips on landing your dream job<br>
+                    ✅ A government-recognized completion certificate<br></strong>>
+                    
+                    Our goal is to bridge the gap between learning and employment by empowering individuals with the skills and confidence to excel in their careers.</p>
+                <a href="#internships" class="btn btn-primary">Explore Internships</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Internships Section -->
+    <section class="internships" id="internships">
+        <div class="container">
+            <h2 class="section-title">Our Internships</h2>
+            <div class="domains-grid">
+                <!-- Domain 1 -->
+                <div class="domain-card">
+                    <h3 class="domain-title">Web Development</h3>
+                    <p class="domain-desc">Learn frontend & backend development to create responsive, dynamic websites.</p>
+                    <a href="https://forms.gle/RwsrWRi4nWfg24jo7" class="btn btn-primary">Apply Now</a>
+                </div>
+
+                <!-- Domain 2 -->
+                <div class="domain-card">
+                    <h3 class="domain-title">Full-Stack Development</h3>
+                    <p class="domain-desc">Build complete web applications from database to user interface.</p>
+                    <a href="https://forms.gle/RwsrWRi4nWfg24jo7" class="btn btn-primary">Apply Now</a>
+                </div>
+
+                <!-- Domain 3 -->
+                <div class="domain-card">
+                    <h3 class="domain-title">Data Analytics</h3>
+                    <p class="domain-desc">Analyze and interpret complex datasets to drive strategic business decisions.</p>
+                    <a href="https://forms.gle/RwsrWRi4nWfg24jo7" class="btn btn-primary">Apply Now</a>
+                </div>
+
+                <!-- Domain 4 -->
+                <div class="domain-card">
+                    <h3 class="domain-title">Data Science</h3>
+                    <p class="domain-desc">Work with AI, ML, and big data to extract valuable insights.</p>
+                    <a href="https://forms.gle/RwsrWRi4nWfg24jo7" class="btn btn-primary">Apply Now</a>
+                </div>
+
+                <!-- Domain 5 -->
+                <div class="domain-card">
+                    <h3 class="domain-title">UI/UX Design</h3>
+                    <p class="domain-desc">Design user-friendly digital experiences that delight users.</p>
+                    <a href="https://forms.gle/RwsrWRi4nWfg24jo7" class="btn btn-primary">Apply Now</a>
+                </div>
+
+                <!-- Domain 6 -->
+                <div class="domain-card">
+                    <h3 class="domain-title">Mobile App Development</h3>
+                    <p class="domain-desc">Create native and cross-platform applications for Android & iOS.</p>
+                    <a href="https://forms.gle/2jUsEiMd9pG653s89" class="btn btn-primary">Apply Now</a>
+                </div>
+
+                <!-- Domain 7 -->
+                <div class="domain-card">
+                    <h3 class="domain-title">Cyber Security</h3>
+                    <p class="domain-desc">Learn ethical hacking & security practices to protect digital assets.</p>
+                    <a href="https://forms.gle/RwsrWRi4nWfg24jo7" class="btn btn-primary">Apply Now</a>
+                </div>
+
+                <!-- Domain 8 -->
+                <div class="domain-card">
+                    <h3 class="domain-title">Software Testing</h3>
+                    <p class="domain-desc">Test and debug applications to ensure quality and performance.</p>
+                    <a href="https://forms.gle/RwsrWRi4nWfg24jo7" class="btn btn-primary">Apply Now</a>
+                </div>
+
+                <!-- Domain 9 -->
+                <div class="domain-card">
+                    <h3 class="domain-title">Machine Learning</h3>
+                    <p class="domain-desc">Train AI models for real-world applications and problem-solving.</p>
+                    <a href="https://forms.gle/RwsrWRi4nWfg24jo7" class="btn btn-primary">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p>Have questions about our internships? Reach out to us and we'll get back to you as soon as possible.</p>
+                    <p><strong>Email:</strong> skilldock.edtech@gmail.com </p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link">f</a>
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">ig</a>
+                        <a href="#" class="social-link">tw</a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Your name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" placeholder="Your email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" placeholder="Your message"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 SkillDock EdTech. All rights reserved.</p>
+                <p>Empowering students with verified internships.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
